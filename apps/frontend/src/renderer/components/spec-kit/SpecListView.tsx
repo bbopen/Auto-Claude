@@ -67,17 +67,17 @@ export function SpecListView({
           <FileBox className="w-8 h-8 text-gray-500" />
         </div>
         <h3 className="text-lg font-medium text-gray-300 mb-2">
-          {t('settings:specKit.noSpecs')}
+          {t('settings:projectSections.specKit.noSpecs')}
         </h3>
         <p className="text-gray-500 mb-4 max-w-md">
-          {t('settings:specKit.noSpecsDescription')}
+          {t('settings:projectSections.specKit.noSpecsDescription')}
         </p>
         <button
           onClick={onCreateSpec}
           className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors"
         >
           <Plus className="w-4 h-4" />
-          <span>{t('settings:specKit.createSpec')}</span>
+          <span>{t('settings:projectSections.specKit.createSpec')}</span>
         </button>
       </div>
     );
@@ -89,14 +89,14 @@ export function SpecListView({
       {/* Header with count and create button */}
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-medium text-gray-200">
-          {t('settings:specKit.specsCount', { count: specs.length })}
+          {t('settings:projectSections.specKit.specsCount', { count: specs.length })}
         </h2>
         <button
           onClick={onCreateSpec}
           className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-sm rounded-lg transition-colors"
         >
           <Plus className="w-4 h-4" />
-          <span>{t('settings:specKit.newSpec')}</span>
+          <span>{t('settings:projectSections.specKit.newSpec')}</span>
         </button>
       </div>
 

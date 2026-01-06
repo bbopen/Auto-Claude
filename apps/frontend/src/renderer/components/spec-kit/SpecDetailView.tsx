@@ -29,10 +29,10 @@ interface TabConfig {
 }
 
 const TABS: TabConfig[] = [
-  { id: 'spec', labelKey: 'settings:specKit.tabs.spec', icon: FileText },
-  { id: 'plan', labelKey: 'settings:specKit.tabs.plan', icon: ListChecks },
-  { id: 'tasks-status', labelKey: 'settings:specKit.tabs.tasksStatus', icon: LayoutGrid },
-  { id: 'tasks-phase', labelKey: 'settings:specKit.tabs.tasksPhase', icon: Layers }
+  { id: 'spec', labelKey: 'settings:projectSections.specKit.tabs.spec', icon: FileText },
+  { id: 'plan', labelKey: 'settings:projectSections.specKit.tabs.plan', icon: ListChecks },
+  { id: 'tasks-status', labelKey: 'settings:projectSections.specKit.tabs.tasksStatus', icon: LayoutGrid },
+  { id: 'tasks-phase', labelKey: 'settings:projectSections.specKit.tabs.tasksPhase', icon: Layers }
 ];
 
 export function SpecDetailView({ spec, projectId }: SpecDetailViewProps) {

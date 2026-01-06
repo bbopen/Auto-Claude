@@ -79,9 +79,9 @@ export function TasksPhaseTab({ spec, projectId }: TasksPhaseTabProps) {
     return (
       <div className="flex flex-col items-center justify-center h-full p-6">
         <Layers className="w-12 h-12 text-gray-500 mb-4" />
-        <p className="text-gray-400 mb-2">{t('settings:specKit.noTasks')}</p>
+        <p className="text-gray-400 mb-2">{t('settings:projectSections.specKit.noTasks')}</p>
         <p className="text-sm text-gray-500 text-center max-w-md">
-          {t('settings:specKit.noTasksDescription')}
+          {t('settings:projectSections.specKit.noTasksDescription')}
         </p>
       </div>
     );

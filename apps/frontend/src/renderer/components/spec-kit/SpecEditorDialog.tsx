@@ -112,8 +112,8 @@ export function SpecEditorDialog({
         setFeedback({
           state: 'success',
           message: mode === 'create'
-            ? t('settings:specKit.editor.created')
-            : t('settings:specKit.editor.updated')
+            ? t('settings:projectSections.specKit.editor.created')
+            : t('settings:projectSections.specKit.editor.updated')
         });
 
         // Close after a short delay to show success feedback
@@ -153,8 +153,8 @@ export function SpecEditorDialog({
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-700">
           <h2 className="text-lg font-semibold">
             {mode === 'create'
-              ? t('settings:specKit.editor.createTitle')
-              : t('settings:specKit.editor.editTitle')
+              ? t('settings:projectSections.specKit.editor.createTitle')
+              : t('settings:projectSections.specKit.editor.editTitle')
             }
           </h2>
           <button
@@ -171,13 +171,13 @@ export function SpecEditorDialog({
           {mode === 'create' && (
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">
-                {t('settings:specKit.editor.specIdLabel')}
+                {t('settings:projectSections.specKit.editor.specIdLabel')}
               </label>
               <input
                 type="text"
                 value={specId}
                 onChange={(e) => setSpecId(e.target.value)}
-                placeholder={t('settings:specKit.editor.specIdPlaceholder')}
+                placeholder={t('settings:projectSections.specKit.editor.specIdPlaceholder')}
                 className={`
                   w-full px-3 py-2 bg-gray-900 border rounded-lg text-sm
                   ${!specId || isValidId
@@ -188,11 +188,11 @@ export function SpecEditorDialog({
                 `}
               />
               <p className="text-xs text-gray-500 mt-1">
-                {t('settings:specKit.editor.specIdHint')}
+                {t('settings:projectSections.specKit.editor.specIdHint')}
               </p>
               {specId && !isValidId && (
                 <p className="text-xs text-red-400 mt-1">
-                  {t('settings:specKit.editor.invalidId')}
+                  {t('settings:projectSections.specKit.editor.invalidId')}
                 </p>
               )}
             </div>
@@ -202,13 +202,13 @@ export function SpecEditorDialog({
           {mode === 'create' && (
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">
-                {t('settings:specKit.editor.specNameLabel')}
+                {t('settings:projectSections.specKit.editor.specNameLabel')}
               </label>
               <input
                 type="text"
                 value={specName}
                 onChange={(e) => handleNameChange(e.target.value)}
-                placeholder={t('settings:specKit.editor.specNamePlaceholder')}
+                placeholder={t('settings:projectSections.specKit.editor.specNamePlaceholder')}
                 className="w-full px-3 py-2 bg-gray-900 border border-gray-600 rounded-lg text-sm focus:border-blue-500 focus:outline-none"
               />
             </div>
@@ -217,12 +217,12 @@ export function SpecEditorDialog({
           {/* Spec Content */}
           <div className="flex-1">
             <label className="block text-sm font-medium text-gray-300 mb-1">
-              {t('settings:specKit.editor.specContentLabel')}
+              {t('settings:projectSections.specKit.editor.specContentLabel')}
             </label>
             <textarea
               value={specContent}
               onChange={(e) => setSpecContent(e.target.value)}
-              placeholder={t('settings:specKit.editor.specContentPlaceholder')}
+              placeholder={t('settings:projectSections.specKit.editor.specContentPlaceholder')}
               className="w-full h-80 px-3 py-2 bg-gray-900 border border-gray-600 rounded-lg text-sm font-mono focus:border-blue-500 focus:outline-none resize-none"
             />
           </div>
@@ -254,7 +254,7 @@ export function SpecEditorDialog({
             onClick={() => onOpenChange(false)}
             className="px-4 py-2 text-sm text-gray-300 hover:text-white"
           >
-            {t('common:actions.cancel')}
+            {t('common:buttons.cancel')}
           </button>
           <button
             onClick={handleSave}
@@ -270,10 +270,10 @@ export function SpecEditorDialog({
             {isSaving ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                {t('common:loading')}
+                {t('common:buttons.saving')}
               </>
             ) : (
-              t('common:actions.save')
+              t('common:buttons.save')
             )}
           </button>
         </div>

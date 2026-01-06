@@ -103,9 +103,9 @@ export function SpecsView({ projectId }: SpecsViewProps) {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border px-6 py-4">
           <div>
-            <h1 className="text-xl font-semibold">{t('settings:specKit.title')}</h1>
+            <h1 className="text-xl font-semibold">{t('settings:projectSections.specKit.title')}</h1>
             <p className="text-sm text-muted-foreground">
-              {t('settings:specKit.description')}
+              {t('settings:projectSections.specKit.description')}
             </p>
           </div>
         </div>

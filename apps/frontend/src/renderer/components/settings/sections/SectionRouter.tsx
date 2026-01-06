@@ -195,7 +195,7 @@ export function SectionRouter({
         </SettingsSection>
       );
 
-    case 'spec-kit':
+    case 'specKit':
       return (
         <SettingsSection
           title={t('projectSections.specKit.title')}
