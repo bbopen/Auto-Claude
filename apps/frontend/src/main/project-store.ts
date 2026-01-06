@@ -235,10 +235,10 @@ export class ProjectStore {
   }
 
   /**
-   * Get tasks for a project by scanning specs directory
+   * Get tasks for a project by scanning specs directory, optionally filtered by specId
    */
-  getTasks(projectId: string): Task[] {
-    console.warn('[ProjectStore] getTasks called with projectId:', projectId);
+  getTasks(projectId: string, specId?: string): Task[] {
+    console.warn('[ProjectStore] getTasks called with projectId:', projectId, 'specId:', specId);
     const project = this.getProject(projectId);
     if (!project) {
       console.warn('[ProjectStore] Project not found for id:', projectId);
@@ -301,7 +301,14 @@ export class ProjectStore {
       }
     }
 
-    const tasks = Array.from(taskMap.values());
+    let tasks = Array.from(taskMap.values());
+
+    // 4. Apply specId filter if provided
+    if (specId) {
+      tasks = tasks.filter(task => task.specId === specId);
+      console.warn('[ProjectStore] Filtered to', tasks.length, 'tasks for specId:', specId);
+    }
+
     console.warn('[ProjectStore] Returning', tasks.length, 'unique tasks (after deduplication)');
     return tasks;
   }

@@ -26,6 +26,42 @@ export interface ProjectSettings {
   mainBranch?: string;
   /** Include CLAUDE.md instructions in agent system prompt (default: true) */
   useClaudeMd?: boolean;
+  /** Enable Spec-Kit mode for spec-driven development with 8-phase methodology */
+  specKitEnabled?: boolean;
+  /** Per-phase model configuration for Spec-Kit (phases 0-7) */
+  specKitPhaseModels?: SpecKitPhaseModelConfig;
+  /** Per-phase thinking level configuration for Spec-Kit (phases 0-7) */
+  specKitPhaseThinking?: SpecKitPhaseThinkingConfig;
+}
+
+/** Model type shorthand for Spec-Kit phases */
+export type SpecKitModelType = 'haiku' | 'sonnet' | 'opus';
+
+/** Thinking level for Spec-Kit phases */
+export type SpecKitThinkingLevel = 'none' | 'low' | 'medium' | 'high' | 'ultrathink';
+
+/** Per-phase model configuration for Spec-Kit's 8 phases */
+export interface SpecKitPhaseModelConfig {
+  setup: SpecKitModelType;       // Phase 0: Setup
+  dataModels: SpecKitModelType;  // Phase 1: Data Models
+  coreServices: SpecKitModelType; // Phase 2: Core Services
+  apiLayer: SpecKitModelType;    // Phase 3: API Layer
+  uiComponents: SpecKitModelType; // Phase 4: UI Components
+  pagesRoutes: SpecKitModelType; // Phase 5: Pages & Routes
+  integration: SpecKitModelType; // Phase 6: Integration
+  polish: SpecKitModelType;      // Phase 7: Polish
+}
+
+/** Per-phase thinking level configuration for Spec-Kit's 8 phases */
+export interface SpecKitPhaseThinkingConfig {
+  setup: SpecKitThinkingLevel;
+  dataModels: SpecKitThinkingLevel;
+  coreServices: SpecKitThinkingLevel;
+  apiLayer: SpecKitThinkingLevel;
+  uiComponents: SpecKitThinkingLevel;
+  pagesRoutes: SpecKitThinkingLevel;
+  integration: SpecKitThinkingLevel;
+  polish: SpecKitThinkingLevel;
 }
 
 export interface NotificationSettings {

@@ -13,6 +13,7 @@ import type {
   GraphitiConnectionTestResult,
   GitStatus
 } from '../../shared/types';
+import type { Spec } from '../../shared/types/speckit';
 
 // Tab state interface (persisted in main process)
 export interface TabState {
@@ -144,6 +145,12 @@ export interface ProjectAPI {
   saveConstitution: (projectId: string, content: string) => Promise<IPCResult>;
   constitutionExists: (projectId: string) => Promise<IPCResult<boolean>>;
   initConstitution: (projectId: string) => Promise<IPCResult<string>>;
+
+  // Spec Operations (spec-kit integration)
+  listSpecs: (projectId: string) => Promise<IPCResult<Spec[]>>;
+  getSpec: (projectId: string, specId: string) => Promise<IPCResult<Spec>>;
+  createSpec: (projectId: string, input: import('../../shared/types/speckit').SpecCreateInput) => Promise<IPCResult<Spec>>;
+  updateSpec: (projectId: string, specId: string, input: import('../../shared/types/speckit').SpecUpdateInput) => Promise<IPCResult<Spec>>;
 }
 
 export const createProjectAPI = (): ProjectAPI => ({
@@ -313,5 +320,18 @@ export const createProjectAPI = (): ProjectAPI => ({
     ipcRenderer.invoke(IPC_CHANNELS.CONSTITUTION_EXISTS, projectId),
 
   initConstitution: (projectId: string): Promise<IPCResult<string>> =>
-    ipcRenderer.invoke(IPC_CHANNELS.CONSTITUTION_INIT, projectId)
+    ipcRenderer.invoke(IPC_CHANNELS.CONSTITUTION_INIT, projectId),
+
+  // Spec Operations (spec-kit integration)
+  listSpecs: (projectId: string): Promise<IPCResult<Spec[]>> =>
+    ipcRenderer.invoke(IPC_CHANNELS.SPEC_LIST, projectId),
+
+  getSpec: (projectId: string, specId: string): Promise<IPCResult<Spec>> =>
+    ipcRenderer.invoke(IPC_CHANNELS.SPEC_GET, projectId, specId),
+
+  createSpec: (projectId: string, input: import('../../shared/types/speckit').SpecCreateInput): Promise<IPCResult<Spec>> =>
+    ipcRenderer.invoke(IPC_CHANNELS.SPEC_CREATE, projectId, input),
+
+  updateSpec: (projectId: string, specId: string, input: import('../../shared/types/speckit').SpecUpdateInput): Promise<IPCResult<Spec>> =>
+    ipcRenderer.invoke(IPC_CHANNELS.SPEC_UPDATE, projectId, specId, input)
 });

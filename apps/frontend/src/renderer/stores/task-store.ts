@@ -241,15 +241,15 @@ export const useTaskStore = create<TaskState>((set, get) => ({
 }));
 
 /**
- * Load tasks for a project
+ * Load tasks for a project, optionally filtered by specId
  */
-export async function loadTasks(projectId: string): Promise<void> {
+export async function loadTasks(projectId: string, specId?: string): Promise<void> {
   const store = useTaskStore.getState();
   store.setLoading(true);
   store.setError(null);
 
   try {
-    const result = await window.electronAPI.getTasks(projectId);
+    const result = await window.electronAPI.getTasks(projectId, specId);
     if (result.success && result.data) {
       store.setTasks(result.data);
     } else {

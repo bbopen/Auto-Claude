@@ -16,7 +16,7 @@ import type {
 
 export interface TaskAPI {
   // Task Operations
-  getTasks: (projectId: string) => Promise<IPCResult<Task[]>>;
+  getTasks: (projectId: string, specId?: string) => Promise<IPCResult<Task[]>>;
   createTask: (
     projectId: string,
     title: string,
@@ -77,8 +77,8 @@ export interface TaskAPI {
 
 export const createTaskAPI = (): TaskAPI => ({
   // Task Operations
-  getTasks: (projectId: string): Promise<IPCResult<Task[]>> =>
-    ipcRenderer.invoke(IPC_CHANNELS.TASK_LIST, projectId),
+  getTasks: (projectId: string, specId?: string): Promise<IPCResult<Task[]>> =>
+    ipcRenderer.invoke(IPC_CHANNELS.TASK_LIST, projectId, specId),
 
   createTask: (
     projectId: string,

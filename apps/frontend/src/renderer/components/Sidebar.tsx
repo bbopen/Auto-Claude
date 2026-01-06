@@ -20,7 +20,8 @@ import {
   Sparkles,
   GitBranch,
   HelpCircle,
-  Wrench
+  Wrench,
+  FileBox
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { ScrollArea } from './ui/scroll-area';
@@ -52,7 +53,7 @@ import { RateLimitIndicator } from './RateLimitIndicator';
 import { ClaudeCodeStatusBadge } from './ClaudeCodeStatusBadge';
 import type { Project, AutoBuildVersionInfo, GitStatus, ProjectEnvConfig } from '../../shared/types';
 
-export type SidebarView = 'kanban' | 'terminals' | 'roadmap' | 'context' | 'ideation' | 'github-issues' | 'gitlab-issues' | 'github-prs' | 'gitlab-merge-requests' | 'changelog' | 'insights' | 'worktrees' | 'agent-tools';
+export type SidebarView = 'kanban' | 'terminals' | 'roadmap' | 'context' | 'ideation' | 'github-issues' | 'gitlab-issues' | 'github-prs' | 'gitlab-merge-requests' | 'changelog' | 'insights' | 'worktrees' | 'agent-tools' | 'specs';
 
 interface SidebarProps {
   onSettingsClick: () => void;
@@ -91,6 +92,11 @@ const githubNavItems: NavItem[] = [
 const gitlabNavItems: NavItem[] = [
   { id: 'gitlab-issues', labelKey: 'navigation:items.gitlabIssues', icon: GitlabIcon, shortcut: 'B' },
   { id: 'gitlab-merge-requests', labelKey: 'navigation:items.gitlabMRs', icon: GitMerge, shortcut: 'R' }
+];
+
+// Spec-Kit nav items shown when spec-kit is enabled
+const specKitNavItems: NavItem[] = [
+  { id: 'specs', labelKey: 'navigation:items.specs', icon: FileBox, shortcut: 'S' }
 ];
 
 export function Sidebar({
@@ -136,9 +142,14 @@ export function Sidebar({
     loadEnvConfig();
   }, [selectedProject?.id, selectedProject?.autoBuildPath]);
 
-  // Compute visible nav items based on GitHub/GitLab enabled state
+  // Compute visible nav items based on GitHub/GitLab/SpecKit enabled state
   const visibleNavItems = useMemo(() => {
     const items = [...baseNavItems];
+
+    // Add Spec-Kit nav items after kanban (at index 1) when enabled
+    if (selectedProject?.settings?.specKitEnabled) {
+      items.splice(1, 0, ...specKitNavItems);
+    }
 
     if (envConfig?.githubEnabled) {
       items.push(...githubNavItems);
@@ -149,7 +160,7 @@ export function Sidebar({
     }
 
     return items;
-  }, [envConfig?.githubEnabled, envConfig?.gitlabEnabled]);
+  }, [envConfig?.githubEnabled, envConfig?.gitlabEnabled, selectedProject?.settings?.specKitEnabled]);
 
   // Keyboard shortcuts
   useEffect(() => {

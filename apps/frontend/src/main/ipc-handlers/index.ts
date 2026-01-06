@@ -34,6 +34,7 @@ import { registerMcpHandlers } from './mcp-handlers';
 import { registerProfileHandlers } from './profile-handlers';
 import { registerTerminalWorktreeIpcHandlers } from './terminal';
 import { registerConstitutionHandlers } from './constitution-handlers';
+import { registerSpecHandlers } from './spec-handlers';
 import { notificationService } from '../notification-service';
 
 /**
@@ -122,6 +123,9 @@ export function setupIpcHandlers(
   // Constitution handlers (spec-kit integration)
   registerConstitutionHandlers();
 
+  // Spec handlers (spec-kit integration)
+  registerSpecHandlers();
+
   console.warn('[IPC] All handler modules registered successfully');
 }
 
@@ -149,5 +153,6 @@ export {
   registerClaudeCodeHandlers,
   registerMcpHandlers,
   registerProfileHandlers,
-  registerConstitutionHandlers
+  registerConstitutionHandlers,
+  registerSpecHandlers
 };

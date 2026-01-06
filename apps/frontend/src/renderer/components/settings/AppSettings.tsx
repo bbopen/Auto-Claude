@@ -95,7 +95,7 @@ const projectNavItemsConfig: NavItemConfig<ProjectSettingsSection>[] = [
   { id: 'github', icon: Github },
   { id: 'gitlab', icon: GitLabIcon },
   { id: 'memory', icon: Database },
-  { id: 'constitution', icon: FileText }
+  { id: 'spec-kit', icon: FileText }
 ];
 
 /**

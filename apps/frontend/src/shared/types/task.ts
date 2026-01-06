@@ -3,6 +3,7 @@
  */
 
 import type { ThinkingLevel, PhaseModelConfig, PhaseThinkingConfig } from './settings';
+import type { SpecKitPhaseModelConfig, SpecKitPhaseThinkingConfig } from './project';
 import type { ExecutionPhase as ExecutionPhaseType } from '../constants/phase-protocol';
 
 export type TaskStatus = 'backlog' | 'in_progress' | 'ai_review' | 'human_review' | 'done';
@@ -225,6 +226,11 @@ export interface TaskMetadata {
   isAutoProfile?: boolean;  // True when using Auto (Optimized) profile
   phaseModels?: PhaseModelConfig;  // Per-phase model configuration
   phaseThinking?: PhaseThinkingConfig;  // Per-phase thinking configuration
+
+  // Spec-Kit integration (injected from project settings when specKitEnabled is true)
+  specKitEnabled?: boolean;  // Enable spec-kit context in coder agent
+  specKitPhaseModels?: SpecKitPhaseModelConfig;  // Per-phase model config for 8 spec-kit phases
+  specKitPhaseThinking?: SpecKitPhaseThinkingConfig;  // Per-phase thinking config for 8 spec-kit phases
 
   // Git/Worktree configuration
   baseBranch?: string;  // Override base branch for this task's worktree

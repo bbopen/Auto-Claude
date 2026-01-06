@@ -3,10 +3,10 @@ import type { Project, ProjectSettings as ProjectSettingsType, AutoBuildVersionI
 import { SettingsSection } from '../SettingsSection';
 import { GeneralSettings } from '../../project-settings/GeneralSettings';
 import { SecuritySettings } from '../../project-settings/SecuritySettings';
-import { ConstitutionSection } from '../../project-settings/ConstitutionSection';
 import { LinearIntegration } from '../integrations/LinearIntegration';
 import { GitHubIntegration } from '../integrations/GitHubIntegration';
 import { GitLabIntegration } from '../integrations/GitLabIntegration';
+import { SpecKitSettings } from '../integrations/SpecKitSettings';
 import { InitializationGuard } from '../common/InitializationGuard';
 import type { ProjectSettingsSection } from '../ProjectSettingsContent';
 
@@ -195,18 +195,22 @@ export function SectionRouter({
         </SettingsSection>
       );
 
-    case 'constitution':
+    case 'spec-kit':
       return (
         <SettingsSection
-          title={t('projectSections.constitution.title')}
-          description={t('projectSections.constitution.description')}
+          title={t('projectSections.specKit.title')}
+          description={t('projectSections.specKit.description')}
         >
           <InitializationGuard
             initialized={!!project.autoBuildPath}
-            title={t('projectSections.constitution.title')}
-            description={t('projectSections.constitution.description')}
+            title={t('projectSections.specKit.title')}
+            description={t('projectSections.specKit.description')}
           >
-            <ConstitutionSection projectId={project.id} />
+            <SpecKitSettings
+              projectId={project.id}
+              settings={settings}
+              setSettings={setSettings}
+            />
           </InitializationGuard>
         </SettingsSection>
       );

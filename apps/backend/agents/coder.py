@@ -84,6 +84,36 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 
+def _determine_speckit_enabled(spec_dir: Path, cli_enabled: bool | None) -> bool:
+    """
+    Determine if spec-kit is enabled.
+
+    Priority:
+    1. task_metadata.json specKitEnabled field (from frontend project settings)
+    2. CLI argument (speckit_enabled parameter)
+    3. Environment variable (SPECKIT_ENABLED via is_speckit_enabled())
+    """
+    import json
+
+    # Priority 1: Read from task_metadata.json
+    metadata_path = spec_dir / "task_metadata.json"
+    if metadata_path.exists():
+        try:
+            with open(metadata_path) as f:
+                metadata = json.load(f)
+            if "specKitEnabled" in metadata:
+                return bool(metadata["specKitEnabled"])
+        except (json.JSONDecodeError, OSError):
+            pass  # Fall through to next priority
+
+    # Priority 2: CLI argument
+    if cli_enabled is not None:
+        return cli_enabled
+
+    # Priority 3: Environment variable (legacy)
+    return is_speckit_enabled()
+
+
 async def run_autonomous_agent(
     project_dir: Path,
     spec_dir: Path,
@@ -112,7 +142,8 @@ async def run_autonomous_agent(
     recovery_manager = RecoveryManager(spec_dir, project_dir)
 
     # Initialize spec-kit context builder (if enabled)
-    use_speckit = speckit_enabled if speckit_enabled is not None else is_speckit_enabled()
+    # Determine if spec-kit is enabled (priority: task_metadata > CLI param > env var)
+    use_speckit = _determine_speckit_enabled(spec_dir, speckit_enabled)
     speckit_context_builder: SpecKitContextBuilder | None = None
 
     if use_speckit and SPECKIT_AVAILABLE:
