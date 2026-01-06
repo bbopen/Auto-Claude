@@ -261,11 +261,13 @@ def map_subtask_to_phase(subtask: dict[str, Any]) -> SpecKitPhase:
         The SpecKitPhase most appropriate for this subtask
     """
     # Build searchable text from subtask content
-    search_text = " ".join([
-        subtask.get("name", ""),
-        subtask.get("description", ""),
-        subtask.get("service", ""),
-    ]).lower()
+    search_text = " ".join(
+        [
+            subtask.get("name", ""),
+            subtask.get("description", ""),
+            subtask.get("service", ""),
+        ]
+    ).lower()
 
     if not search_text.strip():
         return SpecKitPhase.CORE_SERVICES
@@ -288,7 +290,9 @@ def map_subtask_to_phase(subtask: dict[str, Any]) -> SpecKitPhase:
     return best_phase
 
 
-def get_tasks_by_phase(tasks: list[dict[str, Any]]) -> dict[SpecKitPhase, list[dict[str, Any]]]:
+def get_tasks_by_phase(
+    tasks: list[dict[str, Any]],
+) -> dict[SpecKitPhase, list[dict[str, Any]]]:
     """
     Organize tasks into phase buckets.
 
@@ -345,7 +349,9 @@ def get_current_phase(tasks: list[dict[str, Any]]) -> SpecKitPhase:
     return SpecKitPhase.POLISH
 
 
-def get_phase_progress(tasks: list[dict[str, Any]]) -> dict[SpecKitPhase, dict[str, int]]:
+def get_phase_progress(
+    tasks: list[dict[str, Any]],
+) -> dict[SpecKitPhase, dict[str, int]]:
     """
     Calculate progress statistics for each phase.
 
@@ -372,8 +378,12 @@ def get_phase_progress(tasks: list[dict[str, Any]]) -> dict[SpecKitPhase, dict[s
         result[phase] = {
             "total": len(phase_tasks),
             "completed": sum(1 for t in phase_tasks if t.get("status") == "completed"),
-            "pending": sum(1 for t in phase_tasks if t.get("status", "pending") == "pending"),
-            "in_progress": sum(1 for t in phase_tasks if t.get("status") == "in_progress"),
+            "pending": sum(
+                1 for t in phase_tasks if t.get("status", "pending") == "pending"
+            ),
+            "in_progress": sum(
+                1 for t in phase_tasks if t.get("status") == "in_progress"
+            ),
             "blocked": sum(1 for t in phase_tasks if t.get("status") == "blocked"),
         }
 

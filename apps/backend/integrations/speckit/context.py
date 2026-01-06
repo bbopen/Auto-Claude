@@ -116,7 +116,9 @@ class SpecKitContext:
     def current_task_description(self) -> str:
         """Get current task description."""
         if self.current_task:
-            return self.current_task.get("description", self.current_task.get("name", ""))
+            return self.current_task.get(
+                "description", self.current_task.get("name", "")
+            )
         return ""
 
     @property
@@ -229,7 +231,9 @@ class SpecKitContext:
 
         # Phase progress
         if progress["total"] > 0:
-            lines.append(f"\n**Phase Progress:** {progress['completed']}/{progress['total']} completed")
+            lines.append(
+                f"\n**Phase Progress:** {progress['completed']}/{progress['total']} completed"
+            )
 
         return "\n".join(lines)
 
@@ -522,9 +526,7 @@ class SpecKitContextBuilder:
         if plan_md.exists():
             ctx.plan = plan_md.read_text(encoding="utf-8")
 
-    def _set_phase_from_dict(
-        self, ctx: SpecKitContext, phase: dict[str, Any]
-    ) -> None:
+    def _set_phase_from_dict(self, ctx: SpecKitContext, phase: dict[str, Any]) -> None:
         """Set current phase from phase dictionary."""
         # Extract phase number from id if available
         phase_id = phase.get("id", "")
@@ -541,9 +543,7 @@ class SpecKitContextBuilder:
         elif "phase" in phase:
             ctx.current_phase = int(phase["phase"])
 
-    def _find_current_task(
-        self, tasks: list[dict[str, Any]]
-    ) -> dict[str, Any] | None:
+    def _find_current_task(self, tasks: list[dict[str, Any]]) -> dict[str, Any] | None:
         """Find the current task being worked on.
 
         Priority:
