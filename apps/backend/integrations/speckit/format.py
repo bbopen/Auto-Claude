@@ -59,12 +59,7 @@ class SpecKitDocument:
 
     def has_content(self) -> bool:
         """Check if document has any content."""
-        return bool(
-            self.constitution
-            or self.spec
-            or self.plan
-            or self.tasks
-        )
+        return bool(self.constitution or self.spec or self.plan or self.tasks)
 
     def to_dict(self) -> dict:
         """Convert to dictionary representation."""

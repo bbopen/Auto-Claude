@@ -151,7 +151,9 @@ async def run_autonomous_agent(
             speckit_context_builder = SpecKitContextBuilder(project_dir, spec_dir)
             constitution_manager = ConstitutionManager(project_dir)
             if constitution_manager.exists:
-                print_status("Spec-kit context: ENABLED (constitution found)", "success")
+                print_status(
+                    "Spec-kit context: ENABLED (constitution found)", "success"
+                )
             else:
                 print_status("Spec-kit context: ENABLED (no constitution)", "info")
         except Exception as e:

@@ -170,14 +170,18 @@ class SpecKitManager:
 
             # Add nested subtasks
             for sub_idx, sub in enumerate(task.subtasks, start=1):
-                subtasks.append({
-                    "id": f"{idx}.{sub_idx}",
-                    "name": sub.description,
-                    "status": "completed" if sub.completed else "pending",
-                    "service": "backend",
-                    "dependencies": [idx] if sub_idx == 1 else [f"{idx}.{sub_idx - 1}"],
-                    "parent_task": idx,
-                })
+                subtasks.append(
+                    {
+                        "id": f"{idx}.{sub_idx}",
+                        "name": sub.description,
+                        "status": "completed" if sub.completed else "pending",
+                        "service": "backend",
+                        "dependencies": [idx]
+                        if sub_idx == 1
+                        else [f"{idx}.{sub_idx - 1}"],
+                        "parent_task": idx,
+                    }
+                )
 
             # Only add main task if it has no subtasks (otherwise subtasks replace it)
             if not task.subtasks:
@@ -186,7 +190,9 @@ class SpecKitManager:
         completed = len([s for s in subtasks if s["status"] == "completed"])
 
         return {
-            "spec_name": doc.title.lower().replace(" ", "-") if doc.title else "speckit-import",
+            "spec_name": doc.title.lower().replace(" ", "-")
+            if doc.title
+            else "speckit-import",
             "total_subtasks": len(subtasks),
             "completed_subtasks": completed,
             "current_subtask": next(

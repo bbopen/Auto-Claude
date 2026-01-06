@@ -199,7 +199,9 @@ class ConstitutionManager:
                 break
 
             # Extract checked/unchecked items
-            if in_principles_section and (line.startswith("- [") or line.startswith("* [")):
+            if in_principles_section and (
+                line.startswith("- [") or line.startswith("* [")
+            ):
                 # Remove checkbox and extract text
                 if "] " in line:
                     principle = line.split("] ", 1)[1].strip()
@@ -235,7 +237,9 @@ class ConstitutionManager:
                 break
 
             # Extract list items
-            if in_constraints_section and (line.startswith("- ") or line.startswith("* ")):
+            if in_constraints_section and (
+                line.startswith("- ") or line.startswith("* ")
+            ):
                 constraint = line[2:].strip()
                 # Skip placeholder text
                 if constraint and not constraint.startswith("["):
@@ -266,7 +270,9 @@ class ConstitutionManager:
                 continue
 
             # Exit on next section
-            if in_non_negotiables and (line.startswith("## ") or line.startswith("### ")):
+            if in_non_negotiables and (
+                line.startswith("## ") or line.startswith("### ")
+            ):
                 break
 
             # Extract list items
