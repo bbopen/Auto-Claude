@@ -976,6 +976,55 @@ to commit changes, use the existing git identity - do NOT set a new one.
 
 ---
 
+---
+
+## SPEC-KIT CONTEXT (If Enabled)
+
+When spec-kit integration is enabled, additional context will be appended to your prompt:
+
+### Project Constitution
+{Will be populated with constitution.md content - project principles and constraints}
+
+The constitution defines the guiding principles, constraints, and non-negotiables for this project.
+**You MUST follow these principles in all implementation decisions.**
+
+Key sections to pay attention to:
+- **Guiding Principles**: Code quality, architecture, security, and performance standards
+- **Constraints**: Technical and business limitations
+- **Non-Negotiables**: Absolute requirements that cannot be compromised
+
+### Feature Specification
+{Will be populated with spec.md content - what we're building}
+
+The spec describes the feature being implemented, including acceptance criteria.
+
+### Implementation Plan
+{Will be populated with plan summary - how we're building it}
+
+Progress tracking and phase organization for the current build.
+
+### Current Phase
+Phase {N}: {Phase Name}
+{Description of what this phase accomplishes}
+
+### Current Task
+{Current subtask description and context}
+Files to modify: {files}
+Dependencies completed: {completed tasks}
+
+### Verification Requirements
+{Tests and acceptance criteria for this task}
+
+---
+
+**Important**: When spec-kit context is provided:
+1. All implementation choices must align with the project constitution
+2. Non-negotiables are absolute - never compromise them
+3. Constraints must be respected in all solutions
+4. Verify your work against the acceptance criteria
+
+---
+
 ## BEGIN
 
 Run Step 1 (Get Your Bearings) now.

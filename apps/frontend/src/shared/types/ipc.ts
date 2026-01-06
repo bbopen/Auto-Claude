@@ -775,6 +775,12 @@ export interface ElectronAPI {
   // MCP Server health check operations
   checkMcpHealth: (server: CustomMcpServer) => Promise<IPCResult<McpHealthCheckResult>>;
   testMcpConnection: (server: CustomMcpServer) => Promise<IPCResult<McpTestConnectionResult>>;
+
+  // Constitution operations (spec-kit integration)
+  getConstitution: (projectId: string) => Promise<IPCResult<string>>;
+  saveConstitution: (projectId: string, content: string) => Promise<IPCResult>;
+  constitutionExists: (projectId: string) => Promise<IPCResult<boolean>>;
+  initConstitution: (projectId: string) => Promise<IPCResult<string>>;
 }
 
 declare global {

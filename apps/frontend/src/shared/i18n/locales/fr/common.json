@@ -59,6 +59,15 @@
     "required": "Requis",
     "dismiss": "Ignorer"
   },
+  "status": {
+    "configured": "Configuré",
+    "notConfigured": "Non configuré",
+    "loading": "Chargement..."
+  },
+  "actions": {
+    "save": "Enregistrer",
+    "reload": "Recharger"
+  },
   "time": {
     "justNow": "À l'instant",
     "minutesAgo": "Il y a {{count}} min",

@@ -307,6 +307,23 @@
     "rerunWizard": "Re-run Wizard",
     "rerunWizardDescription": "Start the setup wizard again"
   },
+  "constitution": {
+    "title": "Constitution",
+    "label": "Project Constitution",
+    "description": "Define behavioral guidelines and constraints for AI agents working on this project. This file is stored in .specify/memory/constitution.md",
+    "placeholder": "# Project Constitution\n\nDefine your AI behavioral guidelines here...",
+    "notExists": "No constitution file exists for this project. Initialize a default constitution to get started.",
+    "initializeDefault": "Initialize Default Constitution",
+    "reload": "Reload",
+    "saved": "Constitution saved successfully",
+    "reloaded": "Constitution reloaded",
+    "initialized": "Default constitution created",
+    "unsavedChanges": "You have unsaved changes",
+    "errorCheckingExists": "Failed to check if constitution exists",
+    "errorLoading": "Failed to load constitution",
+    "errorSaving": "Failed to save constitution",
+    "errorInitializing": "Failed to initialize constitution"
+  },
   "projectSections": {
     "general": {
       "title": "General",
@@ -345,6 +362,10 @@
       "integrationTitle": "Memory",
       "integrationDescription": "Configure persistent cross-session memory for agents",
       "syncDescription": "Configure persistent memory"
+    },
+    "constitution": {
+      "title": "Constitution",
+      "description": "Project principles & guardrails"
     }
   },
   "agentProfile": {

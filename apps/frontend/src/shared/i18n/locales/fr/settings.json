@@ -307,6 +307,23 @@
     "rerunWizard": "Relancer l'assistant",
     "rerunWizardDescription": "Redémarrer l'assistant de configuration"
   },
+  "constitution": {
+    "title": "Constitution",
+    "label": "Constitution du projet",
+    "description": "Definissez les directives comportementales et les contraintes pour les agents IA travaillant sur ce projet. Ce fichier est stocke dans .specify/memory/constitution.md",
+    "placeholder": "# Constitution du projet\n\nDefinissez vos directives comportementales IA ici...",
+    "notExists": "Aucun fichier de constitution n'existe pour ce projet. Initialisez une constitution par defaut pour commencer.",
+    "initializeDefault": "Initialiser la constitution par defaut",
+    "reload": "Recharger",
+    "saved": "Constitution enregistree avec succes",
+    "reloaded": "Constitution rechargee",
+    "initialized": "Constitution par defaut creee",
+    "unsavedChanges": "Vous avez des modifications non enregistrees",
+    "errorCheckingExists": "Echec de la verification de l'existence de la constitution",
+    "errorLoading": "Echec du chargement de la constitution",
+    "errorSaving": "Echec de l'enregistrement de la constitution",
+    "errorInitializing": "Echec de l'initialisation de la constitution"
+  },
   "projectSections": {
     "general": {
       "title": "Général",
@@ -345,6 +362,10 @@
       "integrationTitle": "Mémoire",
       "integrationDescription": "Configurer la mémoire persistante inter-sessions pour les agents",
       "syncDescription": "Configurer la mémoire persistante"
+    },
+    "constitution": {
+      "title": "Constitution",
+      "description": "Principes et garde-fous du projet"
     }
   },
   "agentProfile": {

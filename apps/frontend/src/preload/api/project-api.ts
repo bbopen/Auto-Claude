@@ -138,6 +138,12 @@ export interface ProjectAPI {
     status: 'completed' | 'failed';
     output: string[];
   }>>;
+
+  // Constitution Operations (spec-kit integration)
+  getConstitution: (projectId: string) => Promise<IPCResult<string>>;
+  saveConstitution: (projectId: string, content: string) => Promise<IPCResult>;
+  constitutionExists: (projectId: string) => Promise<IPCResult<boolean>>;
+  initConstitution: (projectId: string) => Promise<IPCResult<string>>;
 }
 
 export const createProjectAPI = (): ProjectAPI => ({
@@ -294,5 +300,18 @@ export const createProjectAPI = (): ProjectAPI => ({
     ipcRenderer.invoke(IPC_CHANNELS.OLLAMA_LIST_EMBEDDING_MODELS, baseUrl),
 
   pullOllamaModel: (modelName: string, baseUrl?: string) =>
-    ipcRenderer.invoke(IPC_CHANNELS.OLLAMA_PULL_MODEL, modelName, baseUrl)
+    ipcRenderer.invoke(IPC_CHANNELS.OLLAMA_PULL_MODEL, modelName, baseUrl),
+
+  // Constitution Operations (spec-kit integration)
+  getConstitution: (projectId: string): Promise<IPCResult<string>> =>
+    ipcRenderer.invoke(IPC_CHANNELS.CONSTITUTION_GET, projectId),
+
+  saveConstitution: (projectId: string, content: string): Promise<IPCResult> =>
+    ipcRenderer.invoke(IPC_CHANNELS.CONSTITUTION_SAVE, projectId, content),
+
+  constitutionExists: (projectId: string): Promise<IPCResult<boolean>> =>
+    ipcRenderer.invoke(IPC_CHANNELS.CONSTITUTION_EXISTS, projectId),
+
+  initConstitution: (projectId: string): Promise<IPCResult<string>> =>
+    ipcRenderer.invoke(IPC_CHANNELS.CONSTITUTION_INIT, projectId)
 });

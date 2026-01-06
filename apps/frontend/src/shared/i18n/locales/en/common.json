@@ -59,6 +59,15 @@
     "required": "Required",
     "dismiss": "Dismiss"
   },
+  "status": {
+    "configured": "Configured",
+    "notConfigured": "Not Configured",
+    "loading": "Loading..."
+  },
+  "actions": {
+    "save": "Save",
+    "reload": "Reload"
+  },
   "time": {
     "justNow": "Just now",
     "minutesAgo": "{{count}}m ago",

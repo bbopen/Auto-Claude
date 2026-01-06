@@ -297,7 +297,19 @@ const browserMockAPI: ElectronAPI = {
   openLogsFolder: async () => ({ success: false, error: 'Not available in browser mode' }),
   copyDebugInfo: async () => ({ success: false, error: 'Not available in browser mode' }),
   getRecentErrors: async () => [],
-  listLogFiles: async () => []
+  listLogFiles: async () => [],
+
+  // Constitution Operations (spec-kit integration)
+  getConstitution: async () => ({
+    success: true,
+    data: '# Project Constitution\n\n## Purpose\nThis document defines behavioral guidelines for AI agents.\n'
+  }),
+  saveConstitution: async () => ({ success: true }),
+  constitutionExists: async () => ({ success: true, data: true }),
+  initConstitution: async () => ({
+    success: true,
+    data: '# Project Constitution\n\n## Purpose\nThis document defines behavioral guidelines for AI agents.\n'
+  })
 };
 
 /**
