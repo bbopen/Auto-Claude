@@ -271,7 +271,7 @@ def map_subtask_to_phase(subtask: dict[str, Any]) -> SpecKitPhase:
         return SpecKitPhase.CORE_SERVICES
 
     # Score each phase based on keyword matches
-    phase_scores: dict[SpecKitPhase, int] = {phase: 0 for phase in SpecKitPhase}
+    phase_scores: dict[SpecKitPhase, int] = dict.fromkeys(SpecKitPhase, 0)
 
     for phase, keywords in _PHASE_KEYWORDS.items():
         for keyword in keywords:

@@ -23,15 +23,14 @@ from pathlib import Path
 from typing import Any
 
 from .constitution import ConstitutionManager
-from .format import SpecKitDocument
 from .manager import SpecKitManager
 from .phases import (
+    PHASE_DESCRIPTIONS,
     SpecKitPhase,
     get_current_phase,
     get_phase_description,
     get_phase_progress,
     get_tasks_by_phase,
-    PHASE_DESCRIPTIONS,
 )
 
 
