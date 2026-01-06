@@ -13,13 +13,13 @@ import { findTaskAndProject } from './shared';
  */
 export function registerTaskCRUDHandlers(agentManager: AgentManager): void {
   /**
-   * List all tasks for a project
+   * List all tasks for a project, optionally filtered by specId
    */
   ipcMain.handle(
     IPC_CHANNELS.TASK_LIST,
-    async (_, projectId: string): Promise<IPCResult<Task[]>> => {
-      console.warn('[IPC] TASK_LIST called with projectId:', projectId);
-      const tasks = projectStore.getTasks(projectId);
+    async (_, projectId: string, specId?: string): Promise<IPCResult<Task[]>> => {
+      console.warn('[IPC] TASK_LIST called with projectId:', projectId, 'specId:', specId);
+      const tasks = projectStore.getTasks(projectId, specId);
       console.warn('[IPC] TASK_LIST returning', tasks.length, 'tasks');
       return { success: true, data: tasks };
     }
@@ -106,6 +106,18 @@ export function registerTaskCRUDHandlers(agentManager: AgentManager): void {
         sourceType: 'manual',
         ...metadata
       };
+
+      // Inject spec-kit settings from project if enabled
+      const projectSettings = project.settings;
+      if (projectSettings.specKitEnabled) {
+        taskMetadata.specKitEnabled = true;
+        if (projectSettings.specKitPhaseModels) {
+          taskMetadata.specKitPhaseModels = projectSettings.specKitPhaseModels;
+        }
+        if (projectSettings.specKitPhaseThinking) {
+          taskMetadata.specKitPhaseThinking = projectSettings.specKitPhaseThinking;
+        }
+      }
 
       // Process and save attached images
       if (taskMetadata.attachedImages && taskMetadata.attachedImages.length > 0) {

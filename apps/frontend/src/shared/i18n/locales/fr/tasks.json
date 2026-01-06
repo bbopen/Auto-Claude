@@ -106,5 +106,43 @@
   "images": {
     "removeImageAriaLabel": "Supprimer l'image {{filename}}",
     "pasteHint": "Astuce : Collez des captures d'écran directement avec {{shortcut}} pour ajouter des images de référence."
+  },
+  "phases": {
+    "title": "Vue par phase",
+    "progress": "Progression",
+    "noTasks": "Aucune tache dans cette phase",
+    "overallProgress": "{{completed}}/{{total}} taches ({{percent}}%)",
+    "phase0": {
+      "name": "Configuration",
+      "description": "Initialisation et configuration du projet"
+    },
+    "phase1": {
+      "name": "Modeles de donnees",
+      "description": "Schemas de base de donnees et structures de donnees"
+    },
+    "phase2": {
+      "name": "Services principaux",
+      "description": "Logique metier et couche de services"
+    },
+    "phase3": {
+      "name": "Couche API",
+      "description": "Points d'acces REST/GraphQL"
+    },
+    "phase4": {
+      "name": "Composants UI",
+      "description": "Bibliotheque de composants frontend"
+    },
+    "phase5": {
+      "name": "Pages et Routes",
+      "description": "Pages d'application et navigation"
+    },
+    "phase6": {
+      "name": "Integration",
+      "description": "Services tiers et connexions"
+    },
+    "phase7": {
+      "name": "Finition",
+      "description": "Tests, documentation et perfectionnement"
+    }
   }
 }

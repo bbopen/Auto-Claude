@@ -6,9 +6,13 @@ import type { TaskRecoveryOptions } from '../../../shared/types';
 import { mockTasks } from './mock-data';
 
 export const taskMock = {
-  getTasks: async (projectId: string) => ({
+  getTasks: async (projectId: string, specId?: string) => ({
     success: true,
-    data: mockTasks.filter(t => t.projectId === projectId)
+    data: mockTasks.filter(t => {
+      if (t.projectId !== projectId) return false;
+      if (specId && t.specId !== specId) return false;
+      return true;
+    })
   }),
 
   createTask: async (projectId: string, title: string, description: string) => ({

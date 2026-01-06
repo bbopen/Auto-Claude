@@ -106,5 +106,43 @@
   "images": {
     "removeImageAriaLabel": "Remove image {{filename}}",
     "pasteHint": "Tip: Paste screenshots directly with {{shortcut}} to add reference images."
+  },
+  "phases": {
+    "title": "Phase View",
+    "progress": "Progress",
+    "noTasks": "No tasks in this phase",
+    "overallProgress": "{{completed}}/{{total}} tasks ({{percent}}%)",
+    "phase0": {
+      "name": "Setup",
+      "description": "Project initialization and configuration"
+    },
+    "phase1": {
+      "name": "Data Models",
+      "description": "Database schemas and data structures"
+    },
+    "phase2": {
+      "name": "Core Services",
+      "description": "Business logic and service layer"
+    },
+    "phase3": {
+      "name": "API Layer",
+      "description": "REST/GraphQL endpoints"
+    },
+    "phase4": {
+      "name": "UI Components",
+      "description": "Frontend component library"
+    },
+    "phase5": {
+      "name": "Pages & Routes",
+      "description": "Application pages and navigation"
+    },
+    "phase6": {
+      "name": "Integration",
+      "description": "Third-party services and connections"
+    },
+    "phase7": {
+      "name": "Polish",
+      "description": "Testing, documentation, and refinement"
+    }
   }
 }

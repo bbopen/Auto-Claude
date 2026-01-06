@@ -6,6 +6,7 @@ import { SecuritySettings } from '../../project-settings/SecuritySettings';
 import { LinearIntegration } from '../integrations/LinearIntegration';
 import { GitHubIntegration } from '../integrations/GitHubIntegration';
 import { GitLabIntegration } from '../integrations/GitLabIntegration';
+import { SpecKitSettings } from '../integrations/SpecKitSettings';
 import { InitializationGuard } from '../common/InitializationGuard';
 import type { ProjectSettingsSection } from '../ProjectSettingsContent';
 
@@ -189,6 +190,26 @@ export function SectionRouter({
               setShowOpenAIKey={setShowOpenAIKey}
               expanded={true}
               onToggle={() => {}}
+            />
+          </InitializationGuard>
+        </SettingsSection>
+      );
+
+    case 'specKit':
+      return (
+        <SettingsSection
+          title={t('projectSections.specKit.title')}
+          description={t('projectSections.specKit.description')}
+        >
+          <InitializationGuard
+            initialized={!!project.autoBuildPath}
+            title={t('projectSections.specKit.title')}
+            description={t('projectSections.specKit.description')}
+          >
+            <SpecKitSettings
+              projectId={project.id}
+              settings={settings}
+              setSettings={setSettings}
             />
           </InitializationGuard>
         </SettingsSection>

@@ -297,7 +297,63 @@ const browserMockAPI: ElectronAPI = {
   openLogsFolder: async () => ({ success: false, error: 'Not available in browser mode' }),
   copyDebugInfo: async () => ({ success: false, error: 'Not available in browser mode' }),
   getRecentErrors: async () => [],
-  listLogFiles: async () => []
+  listLogFiles: async () => [],
+
+  // Constitution Operations (spec-kit integration)
+  getConstitution: async () => ({
+    success: true,
+    data: '# Project Constitution\n\n## Purpose\nThis document defines behavioral guidelines for AI agents.\n'
+  }),
+  saveConstitution: async () => ({ success: true }),
+  constitutionExists: async () => ({ success: true, data: true }),
+  initConstitution: async () => ({
+    success: true,
+    data: '# Project Constitution\n\n## Purpose\nThis document defines behavioral guidelines for AI agents.\n'
+  }),
+
+  // Spec Operations (spec-kit integration)
+  listSpecs: async () => ({
+    success: true,
+    data: []
+  }),
+  getSpec: async () => ({
+    success: false,
+    error: 'Spec not found'
+  }),
+  createSpec: async (_projectId: string, input: { id: string; name: string; specContent: string }) => ({
+    success: true,
+    data: {
+      id: input.id,
+      name: input.name,
+      path: `/mock/specs/${input.id}`,
+      specContent: input.specContent,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      currentPhase: 0,
+      completedPhases: 0,
+      totalPhases: 8,
+      status: 'draft' as const,
+      taskCount: 0,
+      completedTaskCount: 0
+    }
+  }),
+  updateSpec: async (_projectId: string, specId: string, input: { specContent: string }) => ({
+    success: true,
+    data: {
+      id: specId,
+      name: 'Updated Spec',
+      path: `/mock/specs/${specId}`,
+      specContent: input.specContent,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      currentPhase: 0,
+      completedPhases: 0,
+      totalPhases: 8,
+      status: 'draft' as const,
+      taskCount: 0,
+      completedTaskCount: 0
+    }
+  })
 };
 
 /**

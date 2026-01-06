@@ -307,6 +307,23 @@
     "rerunWizard": "Relancer l'assistant",
     "rerunWizardDescription": "Redémarrer l'assistant de configuration"
   },
+  "constitution": {
+    "title": "Constitution",
+    "label": "Constitution du projet",
+    "description": "Definissez les directives comportementales et les contraintes pour les agents IA travaillant sur ce projet. Ce fichier est stocke dans .specify/memory/constitution.md",
+    "placeholder": "# Constitution du projet\n\nDefinissez vos directives comportementales IA ici...",
+    "notExists": "Aucun fichier de constitution n'existe pour ce projet. Initialisez une constitution par defaut pour commencer.",
+    "initializeDefault": "Initialiser la constitution par defaut",
+    "reload": "Recharger",
+    "saved": "Constitution enregistree avec succes",
+    "reloaded": "Constitution rechargee",
+    "initialized": "Constitution par defaut creee",
+    "unsavedChanges": "Vous avez des modifications non enregistrees",
+    "errorCheckingExists": "Echec de la verification de l'existence de la constitution",
+    "errorLoading": "Echec du chargement de la constitution",
+    "errorSaving": "Echec de l'enregistrement de la constitution",
+    "errorInitializing": "Echec de l'initialisation de la constitution"
+  },
   "projectSections": {
     "general": {
       "title": "Général",
@@ -345,6 +362,50 @@
       "integrationTitle": "Mémoire",
       "integrationDescription": "Configurer la mémoire persistante inter-sessions pour les agents",
       "syncDescription": "Configurer la mémoire persistante"
+    },
+    "constitution": {
+      "title": "Constitution",
+      "description": "Principes et garde-fous du projet"
+    },
+    "specKit": {
+      "title": "Spec-Kit",
+      "description": "Développement piloté par spécifications avec méthodologie en 8 phases",
+      "enableLabel": "Activer le mode Spec-Kit",
+      "enableDescription": "Utiliser le développement piloté par spécifications avec constitution et implémentation en 8 phases",
+      "constitutionTitle": "Constitution",
+      "phaseConfigTitle": "Configuration des phases",
+      "phaseConfigDescription": "Personnaliser le modèle et le niveau de réflexion pour chaque phase de développement",
+      "resetToDefaults": "Réinitialiser par défaut",
+      "model": "Modèle",
+      "thinkingLevel": "Niveau de réflexion",
+      "phaseConfigNote": "Ces paramètres contrôlent la sélection du modèle et la profondeur de réflexion pour chaque phase spec-kit pendant l'implémentation.",
+      "noSpecs": "Aucune spec pour l'instant",
+      "noSpecsDescription": "Créez votre première spec pour commencer à construire avec la méthodologie en 8 phases. Chaque spec définit QUOI construire, tandis que le plan définit COMMENT.",
+      "createSpec": "Créer la première spec",
+      "specsCount": "{{count}} spec(s)",
+      "newSpec": "Nouvelle spec",
+      "tabs": {
+        "spec": "Spec",
+        "plan": "Plan",
+        "tasksStatus": "Tâches (Statut)",
+        "tasksPhase": "Tâches (Phase)"
+      },
+      "noTasks": "Aucune tâche pour cette spec",
+      "noTasksDescription": "Les tâches apparaîtront ici une fois créées pour cette spec. Les tâches sont organisées par phase d'implémentation.",
+      "editor": {
+        "createTitle": "Créer une nouvelle spec",
+        "editTitle": "Modifier la spec",
+        "specIdLabel": "ID de la spec",
+        "specIdPlaceholder": "ex. 001-auth-feature",
+        "specIdHint": "Format: 3 chiffres, tiret, slug en minuscules",
+        "specNameLabel": "Nom",
+        "specNamePlaceholder": "ex. Authentification utilisateur",
+        "specContentLabel": "Contenu (Markdown)",
+        "specContentPlaceholder": "# Nom de la fonctionnalité\n\n## Aperçu\n...",
+        "invalidId": "Format d'ID de spec invalide",
+        "created": "Spec créée avec succès",
+        "updated": "Spec mise à jour avec succès"
+      }
     }
   },
   "agentProfile": {

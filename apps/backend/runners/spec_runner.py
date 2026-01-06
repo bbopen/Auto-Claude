@@ -124,6 +124,9 @@ Examples:
 
   # Interactive mode
   python spec_runner.py --interactive
+
+  # Generate spec-kit format output (constitution.md, plan.md, tasks.md)
+  python spec_runner.py --task "Add feature" --speckit-format
         """,
     )
     parser.add_argument(
@@ -197,6 +200,11 @@ Examples:
         type=str,
         default=None,
         help="Base branch for creating worktrees (default: auto-detect or current branch)",
+    )
+    parser.add_argument(
+        "--speckit-format",
+        action="store_true",
+        help="Generate spec-kit format files (constitution.md, plan.md, tasks.md) alongside JSON",
     )
 
     args = parser.parse_args()
@@ -282,6 +290,29 @@ Examples:
             "Spec creation succeeded",
             spec_dir=str(orchestrator.spec_dir),
         )
+
+        # Generate spec-kit format output if requested
+        if args.speckit_format:
+            try:
+                from integrations.speckit import SpecKitManager
+
+                speckit_manager = SpecKitManager(
+                    orchestrator.spec_dir, orchestrator.project_dir
+                )
+                # Temporarily enable output generation
+                speckit_manager.config.generate_output = True
+                speckit_manager.config.enabled = True
+                speckit_manager.generate_output()
+                debug_success(
+                    "spec_runner",
+                    "Generated spec-kit format files",
+                    spec_dir=str(orchestrator.spec_dir),
+                )
+                print_status("Generated spec-kit format files", "success")
+            except ImportError:
+                debug_error("spec_runner", "Spec-kit integration not available")
+            except Exception as e:
+                debug_error("spec_runner", f"Failed to generate spec-kit output: {e}")
 
         # Auto-start build unless --no-build is specified
         if not args.no_build:

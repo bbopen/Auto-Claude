@@ -65,7 +65,53 @@ from .utils import (
     sync_spec_to_source,
 )
 
+# Spec-kit integration (optional)
+try:
+    from integrations.speckit import (
+        ConstitutionManager,
+        SpecKitContextBuilder,
+        is_speckit_enabled,
+    )
+
+    SPECKIT_AVAILABLE = True
+except ImportError:
+    SPECKIT_AVAILABLE = False
+
+    def is_speckit_enabled() -> bool:
+        return False
+
+
 logger = logging.getLogger(__name__)
+
+
+def _determine_speckit_enabled(spec_dir: Path, cli_enabled: bool | None) -> bool:
+    """
+    Determine if spec-kit is enabled.
+
+    Priority:
+    1. task_metadata.json specKitEnabled field (from frontend project settings)
+    2. CLI argument (speckit_enabled parameter)
+    3. Environment variable (SPECKIT_ENABLED via is_speckit_enabled())
+    """
+    import json
+
+    # Priority 1: Read from task_metadata.json
+    metadata_path = spec_dir / "task_metadata.json"
+    if metadata_path.exists():
+        try:
+            with open(metadata_path) as f:
+                metadata = json.load(f)
+            if "specKitEnabled" in metadata:
+                return bool(metadata["specKitEnabled"])
+        except (json.JSONDecodeError, OSError):
+            pass  # Fall through to next priority
+
+    # Priority 2: CLI argument
+    if cli_enabled is not None:
+        return cli_enabled
+
+    # Priority 3: Environment variable (legacy)
+    return is_speckit_enabled()
 
 
 async def run_autonomous_agent(
@@ -75,6 +121,7 @@ async def run_autonomous_agent(
     max_iterations: int | None = None,
     verbose: bool = False,
     source_spec_dir: Path | None = None,
+    speckit_enabled: bool | None = None,
 ) -> None:
     """
     Run the autonomous agent loop with automatic memory management.
@@ -89,9 +136,29 @@ async def run_autonomous_agent(
         max_iterations: Maximum number of iterations (None for unlimited)
         verbose: Whether to show detailed output
         source_spec_dir: Original spec directory in main project (for syncing from worktree)
+        speckit_enabled: Enable spec-kit context integration (None = auto-detect from env)
     """
     # Initialize recovery manager (handles memory persistence)
     recovery_manager = RecoveryManager(spec_dir, project_dir)
+
+    # Initialize spec-kit context builder (if enabled)
+    # Determine if spec-kit is enabled (priority: task_metadata > CLI param > env var)
+    use_speckit = _determine_speckit_enabled(spec_dir, speckit_enabled)
+    speckit_context_builder: SpecKitContextBuilder | None = None
+
+    if use_speckit and SPECKIT_AVAILABLE:
+        try:
+            speckit_context_builder = SpecKitContextBuilder(project_dir, spec_dir)
+            constitution_manager = ConstitutionManager(project_dir)
+            if constitution_manager.exists:
+                print_status(
+                    "Spec-kit context: ENABLED (constitution found)", "success"
+                )
+            else:
+                print_status("Spec-kit context: ENABLED (no constitution)", "info")
+        except Exception as e:
+            logger.warning(f"Failed to initialize spec-kit context: {e}")
+            speckit_context_builder = None
 
     # Initialize status manager for ccstatusline
     status_manager = StatusManager(project_dir)
@@ -344,6 +411,20 @@ async def run_autonomous_agent(
             if graphiti_context:
                 prompt += "\n\n" + graphiti_context
                 print_status("Graphiti memory context loaded", "success")
+
+            # Build and append spec-kit context (if enabled)
+            if speckit_context_builder:
+                try:
+                    speckit_ctx = speckit_context_builder.build(
+                        current_subtask=next_subtask,
+                        current_phase=phase or {},
+                    )
+                    speckit_prompt = speckit_ctx.format_for_prompt()
+                    if speckit_prompt:
+                        prompt += "\n\n" + speckit_prompt
+                        print_status("Spec-kit context loaded", "success")
+                except Exception as e:
+                    logger.warning(f"Failed to build spec-kit context: {e}")
 
             # Show what we're working on
             print(f"Working on: {highlight(subtask_id)}")

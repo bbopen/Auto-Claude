@@ -507,5 +507,18 @@ export const IPC_CHANNELS = {
   // Sentry error reporting
   SENTRY_STATE_CHANGED: 'sentry:state-changed',  // Notify main process when setting changes
   GET_SENTRY_DSN: 'sentry:get-dsn',              // Get DSN from main process (env var)
-  GET_SENTRY_CONFIG: 'sentry:get-config'         // Get full Sentry config (DSN + sample rates)
+  GET_SENTRY_CONFIG: 'sentry:get-config',        // Get full Sentry config (DSN + sample rates)
+
+  // Constitution operations (spec-kit integration)
+  CONSTITUTION_GET: 'constitution:get',           // Read constitution from project
+  CONSTITUTION_SAVE: 'constitution:save',         // Save constitution to project
+  CONSTITUTION_EXISTS: 'constitution:exists',     // Check if constitution file exists
+  CONSTITUTION_INIT: 'constitution:init',         // Initialize default constitution
+
+  // Spec-Kit operations
+  SPEC_LIST: 'spec:list',                         // List all specs for a project
+  SPEC_GET: 'spec:get',                           // Get a single spec with details
+  SPEC_CREATE: 'spec:create',                     // Create a new spec
+  SPEC_UPDATE: 'spec:update',                     // Update spec.md content
+  SPEC_DELETE: 'spec:delete'                      // Delete a spec
 } as const;

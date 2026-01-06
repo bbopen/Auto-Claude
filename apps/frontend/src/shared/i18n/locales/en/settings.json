@@ -307,6 +307,23 @@
     "rerunWizard": "Re-run Wizard",
     "rerunWizardDescription": "Start the setup wizard again"
   },
+  "constitution": {
+    "title": "Constitution",
+    "label": "Project Constitution",
+    "description": "Define behavioral guidelines and constraints for AI agents working on this project. This file is stored in .specify/memory/constitution.md",
+    "placeholder": "# Project Constitution\n\nDefine your AI behavioral guidelines here...",
+    "notExists": "No constitution file exists for this project. Initialize a default constitution to get started.",
+    "initializeDefault": "Initialize Default Constitution",
+    "reload": "Reload",
+    "saved": "Constitution saved successfully",
+    "reloaded": "Constitution reloaded",
+    "initialized": "Default constitution created",
+    "unsavedChanges": "You have unsaved changes",
+    "errorCheckingExists": "Failed to check if constitution exists",
+    "errorLoading": "Failed to load constitution",
+    "errorSaving": "Failed to save constitution",
+    "errorInitializing": "Failed to initialize constitution"
+  },
   "projectSections": {
     "general": {
       "title": "General",
@@ -345,6 +362,50 @@
       "integrationTitle": "Memory",
       "integrationDescription": "Configure persistent cross-session memory for agents",
       "syncDescription": "Configure persistent memory"
+    },
+    "constitution": {
+      "title": "Constitution",
+      "description": "Project principles & guardrails"
+    },
+    "specKit": {
+      "title": "Spec-Kit",
+      "description": "Spec-driven development with 8-phase methodology",
+      "enableLabel": "Enable Spec-Kit Mode",
+      "enableDescription": "Use spec-driven development with constitution and 8-phase implementation",
+      "constitutionTitle": "Constitution",
+      "phaseConfigTitle": "Phase Configuration",
+      "phaseConfigDescription": "Customize model and thinking level for each development phase",
+      "resetToDefaults": "Reset to defaults",
+      "model": "Model",
+      "thinkingLevel": "Thinking Level",
+      "phaseConfigNote": "These settings control model selection and thinking depth for each spec-kit phase during implementation.",
+      "noSpecs": "No specs yet",
+      "noSpecsDescription": "Create your first spec to start building with the 8-phase methodology. Each spec defines WHAT to build, while the plan defines HOW.",
+      "createSpec": "Create First Spec",
+      "specsCount": "{{count}} spec(s)",
+      "newSpec": "New Spec",
+      "tabs": {
+        "spec": "Spec",
+        "plan": "Plan",
+        "tasksStatus": "Tasks (Status)",
+        "tasksPhase": "Tasks (Phase)"
+      },
+      "noTasks": "No tasks for this spec",
+      "noTasksDescription": "Tasks will appear here once they are created for this spec. Tasks are organized by implementation phase.",
+      "editor": {
+        "createTitle": "Create New Spec",
+        "editTitle": "Edit Spec",
+        "specIdLabel": "Spec ID",
+        "specIdPlaceholder": "e.g., 001-auth-feature",
+        "specIdHint": "Format: 3 digits, dash, lowercase slug",
+        "specNameLabel": "Name",
+        "specNamePlaceholder": "e.g., User Authentication",
+        "specContentLabel": "Content (Markdown)",
+        "specContentPlaceholder": "# Feature Name\n\n## Overview\n...",
+        "invalidId": "Invalid spec ID format",
+        "created": "Spec created successfully",
+        "updated": "Spec updated successfully"
+      }
     }
   },
   "agentProfile": {
